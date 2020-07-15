@@ -1,4 +1,19 @@
-[![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
+### WireFrame
+
+LandingPage. <WireFrames/LandingPage.png>
+
+### MVP User Stories:
+
+- As an unregistered user, I would like to sign up with email and password.
+- As a registered user, I would like to sign in with email and password.
+- As a signed in user, I would like to change password.
+- As a signed in user, I would like to sign out.
+- As an unregistered user, I would like to see all of the products.
+- As a signed in user, I would like to add and remove products from a shopping
+  cart.
+- As a signed in user, I would like to purchase products in a shopping cart
+  using [Stripe](https://stripe.com/docs/checkout).
+- As a signed in user, I would like to see all my past orders.
 
 # react-auth-template
 
