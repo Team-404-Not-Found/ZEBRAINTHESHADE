@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const cartIndex = () => {
   return axios({
-    url: apiUrl + '/cart',
+    url: apiUrl + '/carts',
     method: 'GET'
   })
 }
