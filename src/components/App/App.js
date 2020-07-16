@@ -9,6 +9,8 @@ import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
 import Inventory from '../Products/Inventory'
+import CartItems from '../Products/CartItems.js'
+import UserInventory from '../Products/UserInventory'
 
 class App extends Component {
   constructor () {
@@ -30,7 +32,6 @@ class App extends Component {
 
   render () {
     const { msgAlerts, user } = this.state
-
     return (
       <Fragment>
         <Header user={user} />
@@ -55,7 +56,13 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
-          <Route path='/' component={Inventory} />
+          <AuthenticatedRoute user={user} path='/cart-items' render={() => (
+            <CartItems />
+          )} />
+          <AuthenticatedRoute user={user} path='/user-inventory' render={() => (
+            <UserInventory />
+          )} />
+          <Route exact path='/' component={Inventory} />
         </main>
       </Fragment>
     )
