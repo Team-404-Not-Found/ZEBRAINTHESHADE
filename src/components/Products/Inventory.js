@@ -1,37 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import Item from './Item'
 import { productsIndex } from '../../api/Inventory'
-
+// import Item component and GET API call
 const Inventory = () => {
   // API call for all products (GET)
   // This will return all products in an array
   // All information will be a reflection of productSchema
-  // const [singleItem, setSingleItem] = useState({
-  //   name: '',
-  //   price: null,
-  //   description: '',
-  //   imageUrl: '',
-  //   category: '',
-  //   inStock: false,
-  //   quantity: null
-  // })
 
+  // Initialize empty array to receive database Index
   const [productsArray, setProductsArray] = useState([])
 
+  // useEffect after render to make API call
+  // set productsArray with response. Run once per render
   useEffect(() => {
     productsIndex()
       .then(res => setProductsArray(res.data.products))
-      .then(() => console.log(productsArray))
       .catch(() => console.log('failed to get places'))
   }, [])
 
-  // const declareItem = event => {
-  //   event.preventDefault()
-  //   setSingleItem(prevItem => {
-  //     const newItem = Object.assign({}, prevItem, item)
-  //     return newItem
-  //   })
-  // }
+  // basic styling for Index values
   const containerStyle = {
     display: 'flex',
     flexWrap: 'Wrap',
