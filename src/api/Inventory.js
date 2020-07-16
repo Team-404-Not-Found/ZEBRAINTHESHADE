@@ -8,19 +8,13 @@ export const productsIndex = () => {
   })
 }
 
-export const productsCreate = () => {
+export const productsCreate = item => {
+  console.log(item)
   return axios({
     url: apiUrl + '/products',
     method: 'POST',
     data: {
-      products: {
-        name: '',
-        price: '',
-        description: '',
-        imageUrl: '',
-        category: '',
-        quantity: '',
-        seller: ''
-      }
+      product: item
+    }
   })
 }
