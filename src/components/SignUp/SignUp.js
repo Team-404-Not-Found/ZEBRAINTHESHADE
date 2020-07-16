@@ -29,7 +29,6 @@ class SignUp extends Component {
     const { msgAlert, history, setUser } = this.props
     let userId = null
     signUp(this.state)
-      .then(res => console.log(res))
       .then(() => signIn(this.state))
       .then(res => {
         setUser(res.data.user)

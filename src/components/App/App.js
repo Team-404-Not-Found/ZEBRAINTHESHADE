@@ -11,6 +11,7 @@ import ChangePassword from '../ChangePassword/ChangePassword'
 import Inventory from '../Products/Inventory'
 import CartItems from '../Products/CartItems.js'
 import UserInventory from '../Products/UserInventory'
+import ProductCreate from '../ProductCreate/ProductCreate'
 
 class App extends Component {
   constructor () {
@@ -63,6 +64,7 @@ class App extends Component {
             <UserInventory />
           )} />
           <Route exact path='/' component={Inventory} />
+          <Route exact path='/createProduct' component={ProductCreate} />
         </main>
       </Fragment>
     )
