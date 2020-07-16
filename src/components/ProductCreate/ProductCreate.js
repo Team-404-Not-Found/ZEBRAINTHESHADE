@@ -1,152 +1,130 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import React, { useState } from 'react'
 
 import { productsCreate } from '../../api/Inventory'
-import messagesprod_create from '../AutoDismissAlert/messagesprod_create.js'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-class ProductsCreate extends Component {
-  constructor () {
-    super()
-
-    this.state = {
-      name: '',
-      price: '',
-      description: '',
-      imageUrl: '',
-      category: '',
-      quantity: '',
-      seller: ''
-    }
-  }
-
-  handleChange = event => this.setState({
-    [event.target.name]: event.target.value
+const ProductCreate = () => {
+  const [item, setItem] = useState({
+    name: '',
+    price: 0,
+    description: '',
+    imageUrl: '',
+    category: '',
+    quantity: 0,
+    seller: ''
   })
 
-  onSignIn = event => {
-    event.preventDefault()
-
-    const { msgAlert, history, setProduct } = this.props
-
-    productsCreate(this.state)
-      .then(res => setProduct(res.data.product))
-      .then(() => msgAlert({
-        heading: 'Product Created',
-        message: messagesprod_create.productCreatedSuccess,
-        variant: 'success'
-      }))
-      .then(() => history.push('/products'))
-      .catch(error => {
-        this.setState({
-          name: '',
-          price: '',
-          description: '',
-          imageUrl: '',
-          category: '',
-          quantity: '',
-          seller: ''})
-        msgAlert({
-          heading: 'Product Create Failed with error: ' + error.message,
-          message: messagesprod_create.productCreatedFailed,
-          variant: 'danger'
-        })
-      })
+  const handleChange = event => {
+    event.persist()
+    setItem(prevItem => {
+      const updatedItem = { [event.target.name]: event.target.value }
+      const newItem = Object.assign({}, prevItem, updatedItem)
+      return newItem
+    })
   }
 
-  render () {
-    const { name, price, description, imageUrl, category, quantity, seller } = this.state
+  const onSubmitItem = event => {
+    event.preventDefault()
+    console.log(item)
+    productsCreate(item)
+      .then(res => res.status(201).json(res))
+      .catch(() => console.log('did not create product'))
+  }
 
-    return (
-      <div className="row">
-        <div className="col-sm-10 col-md-8 mx-auto mt-5">
-          <h3>Product Create</h3>
-          <Form onSubmit={this.onProductCreate}>
-            <Form.Group controlId="name">
-              <Form.Label>Product Name</Form.Label>
-              <Form.Control
-                required
-                type="name"
-                name="name"
-                value={name}
-                placeholder="Product Name"
-                onChange={this.handleChange}
-              />
+  return (
+    <div className="row">
+      <div className="col-sm-10 col-md-8 mx-auto mt-5">
+        <h3>Product Create</h3>
+        <Form onSubmit={onSubmitItem}>
+          <Form.Group controlId="name">
+            <Form.Label>Product Name</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              name="name"
+              value={item.name}
+              placeholder="Product Name"
+              onChange={handleChange}
+            />
           </Form.Group>
           <Form.Group controlId="price">
             <Form.Label>Price</Form.Label>
             <Form.Control
               required
               name="price"
-              value={price}
-              type="price"
+              value={item.price}
+              type="number"
               placeholder="Price"
-              onChange={this.handleChange}
+              onChange={handleChange}
             />
-          <Form.Group controlId="description>
+          </Form.Group>
+          <Form.Group controlId="description">
             <Form.Label>Description</Form.Label>
             <Form.Control
               required
               name="description"
-              value={description}
-              type="description"
+              value={item.description}
+              type="text"
               placeholder="Description"
-              onChange={this.handleChange}
+              onChange={handleChange}
             />
+          </Form.Group>
           <Form.Group controlId="imageUrl">
             <Form.Label>ImageURL</Form.Label>
             <Form.Control
               required
               name="imageUrl"
-              value={imageUrl}
-              type="imageUrl"
+              value={item.imageUrl}
+              type="text"
               placeholder="Image URL"
-              onChange={this.handleChange}
+              onChange={handleChange}
             />
+          </Form.Group>
           <Form.Group controlId="category">
             <Form.Label>Category</Form.Label>
             <Form.Control
               required
               name="category"
-              value={category}
+              value={item.category}
               type="category"
               placeholder="Category"
-              onChange={this.handleChange}
+              onChange={handleChange}
             />
+          </Form.Group>
           <Form.Group controlId="quantity">
             <Form.Label>Quantity</Form.Label>
             <Form.Control
               required
               name="quantity"
-              value={quantity}
-              type="quantity"
+              value={item.quantity}
+              type="number"
               placeholder="Quantity"
-              onChange={this.handleChange}
+              onChange={handleChange}
             />
+          </Form.Group>
           <Form.Group controlId="seller">
             <Form.Label>Seller</Form.Label>
             <Form.Control
               required
               name="seller"
-              value={seller}
-              type="seller"
+              value={item.seller}
+              type="text"
               placeholder="Seller"
-              onChange={this.handleChange}
+              onChange={handleChange}
             />
-            </Form.Group>
-            <Button
-              variant="primary"
-              type="submit"
-            >
-              Submit
-            </Button>
-          </Form>
-        </div>
+          </Form.Group>
+          <Button
+            variant="primary"
+            type="submit"
+          >
+            Submit
+          </Button>
+        </Form>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
-export default withRouter(SignIn)
+export default ProductCreate
