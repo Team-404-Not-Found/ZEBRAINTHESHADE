@@ -1,16 +1,16 @@
 import React from 'react'
 
-const Item = props => {
-  const { name, price, description, imageUrl, category, inStock, quantity } = props.details
+const Item = ({ name, price, description, imageUrl, category, inStock, quantity }) => {
+  const containerStyle = {
+    border: '1px solid black'
+  }
   return (
-    <div>
-      {category}
-      {name}
-      {price}
-      {description}
-      {imageUrl}
-      {inStock}
-      {quantity}
+    <div style={containerStyle}>
+      <p>{imageUrl}</p>
+      <h2>Name: {name}</h2>
+      <h3>Price: {price}</h3>
+      <p>Description: {description}</p>
+      <h5>{category}</h5>
     </div>
   )
 }
