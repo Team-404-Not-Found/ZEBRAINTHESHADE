@@ -7,3 +7,20 @@ export const productsIndex = () => {
     method: 'GET'
   })
 }
+
+export const productsCreate = () => {
+  return axios({
+    url: apiUrl + '/products',
+    method: 'POST',
+    data: {
+      products: {
+        name: '',
+        price: '',
+        description: '',
+        imageUrl: '',
+        category: '',
+        quantity: '',
+        seller: ''
+      }
+  })
+}
