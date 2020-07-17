@@ -33,12 +33,12 @@ const Inventory = () => {
         {productsArray.map(product => (
           <Item
             key={product.name}
+            id={product._id}
             name={product.name}
             price={product.price}
             description={product.description}
             imageUrl={product.imageUrl}
             category={product.category}
-            inStock={product.inStock}
             quantity={product.quantity}
           />
         ))}
