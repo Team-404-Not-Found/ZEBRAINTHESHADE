@@ -12,6 +12,7 @@ import Inventory from '../Products/Inventory'
 import CartItems from '../Products/CartItems.js'
 import UserInventory from '../Products/UserInventory'
 import ProductCreate from '../ProductCreate/ProductCreate'
+import ItemsInCart from '../Products/ItemsInCart'
 
 class App extends Component {
   constructor () {
@@ -62,6 +63,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/user-inventory' render={() => (
             <UserInventory />
+          )} />
+          <AuthenticatedRoute user={user} path='/item-in-cart' render={() => (
+            <ItemsInCart />
           )} />
           <Route exact path='/' component={Inventory} />
           <Route exact path='/createProduct' component={ProductCreate} />
