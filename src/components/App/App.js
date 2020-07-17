@@ -65,7 +65,7 @@ class App extends Component {
             <CartItems />
           )} />
           <AuthenticatedRoute user={user} path='/user-inventory' render={() => (
-            <UserInventory />
+            <UserInventory cartId={this.state.cartId} />
           )} />
           <AuthenticatedRoute user={user} path='/item-in-cart' render={() => (
             <ItemsInCart />
