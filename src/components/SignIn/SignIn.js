@@ -25,7 +25,7 @@ class SignIn extends Component {
   onSignIn = event => {
     event.preventDefault()
 
-    const { msgAlert, history, setUser, setCartOwner } = this.props
+    const { msgAlert, history, setUser, setCartId } = this.props
     let userId = null
     signIn(this.state)
       .then(res => {
@@ -38,7 +38,7 @@ class SignIn extends Component {
         variant: 'success'
       }))
       .then(() => getCart(userId))
-      .then(res => setCartOwner(res.data.cart.owner))
+      .then(res => setCartId(res.data.cart._id))
       .then(() => history.push('/user-inventory'))
       .catch(error => {
         this.setState({ email: '', password: '' })
