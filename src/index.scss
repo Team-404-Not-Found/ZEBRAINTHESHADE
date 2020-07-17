@@ -1,1 +1,27 @@
 @import '~bootstrap/scss/bootstrap';
+
+.item-box {
+  display: flex;
+  justify-content: space-evenly;
+  border: solid black 1px;
+}
+.itemImg {
+  width: 100px;
+  height: 100px;
+  border: solid black 1px;
+  margin: 50px 0;
+}
+.amount {
+  padding: 80px 0;
+  text-align: center;
+}
+.btn-info {
+  margin: 80px 0;
+  text-align: center;
+}
+.btn-primary {
+  margin: 70px 0;
+}
+.cartName {
+  text-align: center;
+}
