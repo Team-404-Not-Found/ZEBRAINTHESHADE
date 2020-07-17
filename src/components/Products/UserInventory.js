@@ -34,6 +34,7 @@ const UserInventory = () => {
         {productsArray.map(product => (
           <ItemWithButton
             key={product.name}
+            id={product._id}
             name={product.name}
             price={product.price}
             description={product.description}
