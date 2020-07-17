@@ -1,14 +1,19 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
-const Item = ({ name, price, description, imageUrl, category, quantity, id }) => {
+import { pushToCart } from './../../api/cartIndex'
+const Item = ({ name, price, description, imageUrl, category, quantity, id, cartId }) => {
   const containerStyle = {
     border: '1px solid black'
   }
   // const arrayOfProducts = []
-  // const pushtoCart = (cartID, prodID) => {
-  //   pushtoCart()
-  //     .then(res => arrayOfProducts =res.products)
-  // }
+  const addToCart = (event) => {
+    event.preventDefault()
+    // calling our pushToCart API CALL
+    // which recieves a cart id and a product id
+    pushToCart(cartId, id)
+      .then(res => console.log(res))
+      .catch(() => console.log('Huh.  Keep at it.'))
+  }
   /*  {productsArray.map(product => (
     <Item
       key={product.name}
@@ -21,10 +26,7 @@ const Item = ({ name, price, description, imageUrl, category, quantity, id }) =>
       quantity={product.quantity}
     />
     ))} */
-  const test = event => {
-    event.preventDefault()
-    console.log(id)
-  }
+
   return (
     <div style={containerStyle}>
       <p>{imageUrl}</p>
@@ -32,7 +34,7 @@ const Item = ({ name, price, description, imageUrl, category, quantity, id }) =>
       <h3>Price: {price}</h3>
       <p>Description: {description}</p>
       <h5>{category}</h5>
-      <Button onClick={test}
+      <Button onClick={addToCart}
         variant="primary"
         type="submit"
       >
