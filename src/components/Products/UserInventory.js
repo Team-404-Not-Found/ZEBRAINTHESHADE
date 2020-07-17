@@ -4,7 +4,7 @@ import { productsIndex } from '../../api/Inventory'
 // import Button from 'react-bootstrap/Button'
 // import SignIn from './../SignIn/SignIn'
 // import Item component and GET API call
-const UserInventory = () => {
+const UserInventory = (props) => {
   // API call for all products (GET)
   // This will return all products in an array
   // All information will be a reflection of productSchema
@@ -31,6 +31,7 @@ const UserInventory = () => {
     <div>
       <h2>All Products</h2>
       <div style = {containerStyle} >
+        <h3>{props.cartId}</h3>
         {productsArray.map(product => (
           <ItemWithButton
             key={product.name}
@@ -42,6 +43,7 @@ const UserInventory = () => {
             category={product.category}
             inStock={product.inStock}
             quantity={product.quantity}
+            cartId={props.cartId}
           />
 
         ))}
