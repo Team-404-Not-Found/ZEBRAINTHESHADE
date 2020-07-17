@@ -10,7 +10,6 @@ const Item = ({ name, price, description, imageUrl, category, quantity, id, cart
     event.preventDefault()
     // calling our pushToCart API CALL
     // which recieves a cart id and a product id
-    console.log(id, 'id is or is not.')
     pushToCart(cartId, id)
       .then(res => console.log(res))
       .catch(() => console.log('Huh.  Keep at it.'))
