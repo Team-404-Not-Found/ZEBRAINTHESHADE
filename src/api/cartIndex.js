@@ -19,3 +19,15 @@ export const getCart = id => {
     method: 'GET'
   })
 }
+
+export const pushToCart = (cartId, prodId) => {
+  return axios({
+    url: "https://protected-gorge-91362.herokuapp.com/carts" + cartId,
+    method: 'POST',
+    data: {
+      item: {
+        id: prodId
+      }
+    }
+  })
+}
