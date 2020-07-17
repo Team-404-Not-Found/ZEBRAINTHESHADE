@@ -20,11 +20,14 @@ class App extends Component {
 
     this.state = {
       user: null,
+      cartOwner: '',
       msgAlerts: []
     }
   }
 
   setUser = user => this.setState({ user })
+
+  setCartOwner = owner => this.setState({ cartOwner: owner })
 
   clearUser = () => this.setState({ user: null })
 
@@ -47,13 +50,13 @@ class App extends Component {
         ))}
         <main className="container">
           <Route path='/sign-up' render={() => (
-            <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
+            <SignUp msgAlert={this.msgAlert} setUser={this.setUser} setCartOwner={this.setCartOwner} />
           )} />
           <Route path='/sign-in' render={() => (
-            <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
+            <SignIn msgAlert={this.msgAlert} setUser={this.setUser} setCartOwner={this.setCartOwner} />
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
-            <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
+            <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} setCartOwner={this.setCartOwner} />
           )} />
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />

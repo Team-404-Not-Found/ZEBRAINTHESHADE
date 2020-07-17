@@ -23,7 +23,6 @@ const Inventory = () => {
   const containerStyle = {
     display: 'flex',
     flexWrap: 'Wrap',
-    padding: '30px',
     border: '1px solid black'
   }
 

@@ -6,8 +6,8 @@ import messages from '../AutoDismissAlert/messages'
 
 class SignOut extends Component {
   componentDidMount () {
-    const { msgAlert, history, clearUser, user } = this.props
-
+    const { msgAlert, history, clearUser, user, setCartOwner } = this.props
+    setCartOwner('')
     signOut(user)
       .finally(() => msgAlert({
         heading: 'Signed Out Successfully',
