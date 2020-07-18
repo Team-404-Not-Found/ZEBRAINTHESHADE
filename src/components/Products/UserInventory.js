@@ -44,7 +44,6 @@ const UserInventory = (props) => {
             quantity={product.quantity}
             cartId={props.cartId}
           />
-
         ))}
       </div>
     </div>
