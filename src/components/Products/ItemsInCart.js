@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import './../../index.scss'
-import Button from 'react-bootstrap/Button'
 import CartItem from './CartItems'
 import { getCart } from '../../api/cartIndex'
+import ItemStyling from './ItemStyling'
 const ItemsInCart = props => {
   // onClick -> give us product info, including cartID and OwnerID.
   // need cartID and and productID in order to make API call.
@@ -19,55 +19,24 @@ const ItemsInCart = props => {
   useEffect(() => {
     getCart(props.user._id)
       // .then(res => setCartArray(res.data.cart.products.toString()))
-      .then(res => setCartArray(res.data.cart.products.map(({ item }) => ({ id: item._id, name: item.name }))))
+      .then(res => setCartArray(res.data.cart.products))
       .then(() => console.log('this worked'))
       .catch(() => console.log('failed to show cart'))
   }, [])
 
   return (
     <CartItem>
-      {cartArray}
-      <div className='item-box'>
-        <div className='itemImg'>Img Here</div>
-        <p className='amount'>Item Name1</p>
-        <p className='amount'>quantities: </p>
-        <h4 className='amount'>1</h4>
-        <Button variant="info">-</Button>
-        <Button variant="info">+</Button>
-        <Button
-          variant="primary"
-          type="submit"
-        >
-      Remove
-        </Button>
-      </div>
-      <div className='item-box'>
-        <div className='itemImg'>Img Here</div>
-        <p className='amount'>Item Name2</p>
-        <p className='amount'>quantities: </p>
-        <h4 className='amount'>10</h4>
-        <Button variant="info">-</Button>
-        <Button variant="info">+</Button>
-        <Button
-          variant="primary"
-          type="submit"
-        >
-      Remove
-        </Button>
-      </div>
-      <div className='item-box'>
-        <div className='itemImg'>Img Here</div>
-        <p className='amount'>Item Name3</p>
-        <p className='amount'>quantities: </p>
-        <h4 className='amount'>5</h4>
-        <Button variant="info">-</Button>
-        <Button variant="info">+</Button>
-        <Button
-          variant="primary"
-          type="submit"
-        >
-      Remove
-        </Button>
+      <div>
+        {cartArray.map(product => (
+          <ItemStyling
+            key={product.name}
+            id={product._id}
+            name={product.name}
+            price={product.price}
+            imageUrl={product.imageUrl}
+            quantity={product.quantity}
+          />
+        ))}
       </div>
     </CartItem>
   )
