@@ -26,6 +26,8 @@ const ItemStyling = ({ name, price, imageUrl, quantity, id }) => {
           name="quantity"
           value={quan.quantity}
           type="number"
+          min="1"
+          max={quantity}
           placeholder="Quantity"
           onChange={handleChange}
         />

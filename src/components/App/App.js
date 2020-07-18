@@ -36,7 +36,7 @@ class App extends Component {
   }
 
   render () {
-    const { msgAlerts, user, cartId } = this.state
+    const { msgAlerts, user } = this.state
     return (
       <Fragment>
         <Header user={user} />
@@ -65,7 +65,7 @@ class App extends Component {
             <CartItems />
           )} />
           <AuthenticatedRoute user={user} path='/user-inventory' render={() => (
-            <UserInventory cartId={this.state.cartId} />
+            <UserInventory />
           )} />
           <AuthenticatedRoute user={user} path='/item-in-cart' render={() => (
             <ItemsInCart user={user} />
@@ -73,9 +73,6 @@ class App extends Component {
           <Route exact path='/' component={Inventory} />
           <Route exact path='/createProduct' component={ProductCreate} />
         </main>
-        <footer>
-          <h2>{cartId}</h2>
-        </footer>
       </Fragment>
     )
   }
