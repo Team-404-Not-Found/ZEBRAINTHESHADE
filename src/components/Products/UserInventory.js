@@ -31,7 +31,6 @@ const UserInventory = (props) => {
     <div>
       <h2>All Products</h2>
       <div style = {containerStyle} >
-        <h3>{props.cartId}</h3>
         {productsArray.map(product => (
           <ItemWithButton
             key={product.name}
