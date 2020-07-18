@@ -19,7 +19,7 @@ const ItemStyling = ({ name, price, imageUrl, quantity, id }) => {
         <img src={imageUrl} alt={name} />
       </div>
       <p className='amount'>Name: {name}</p>
-      <Form.Group controlId="quantity">
+      <Form.Group className= 'amount' controlId="quantity">
         <Form.Label>Quantity</Form.Label>
         <Form.Control
           required
