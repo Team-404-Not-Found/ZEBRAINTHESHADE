@@ -3,6 +3,7 @@ import './../../index.scss'
 import CartItem from './CartItems'
 import { getCart } from '../../api/cartIndex'
 import ItemStyling from './ItemStyling'
+import CheckoutElement from './CheckoutElement'
 const ItemsInCart = props => {
   // onClick -> give us product info, including cartID and OwnerID.
   // need cartID and and productID in order to make API call.
@@ -35,9 +36,11 @@ const ItemsInCart = props => {
             price={product.price}
             imageUrl={product.imageUrl}
             quantity={product.quantity}
+            cartId={props.cartId}
           />
         ))}
       </div>
+      <CheckoutElement />
     </CartItem>
   )
 }

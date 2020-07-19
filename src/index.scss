@@ -8,19 +8,19 @@
 .itemImg {
   width: 100px;
   height: 100px;
-  border: solid black 1px;
   margin: 50px 0;
 }
 .amount {
   padding: 80px 0;
   text-align: center;
+  font-size: 24px;
 }
 .btn-info {
   margin: 80px 0;
   text-align: center;
 }
 .btn-primary {
-  margin: 70px 0;
+  margin: 80px 0;
 }
 .cartName {
   text-align: center;
@@ -28,4 +28,32 @@
 img {
 max-width: 100%;
 max-height: 100%;
+}
+.checkout-element:after {
+  display: table;
+  clear: both;
+}
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 300px;
+}
+.checkout {
+  border: solid #f2f3f4 1px;
+  border-style: groove;
+  font-size: 24px;
+
+}
+.checkout-btn {
+  margin: 5px auto;
+  width: 100%;
+
+}
+.checkout-section {
+  border: solid #f2f3f4 1px;
+  border-style: groove;
+}
+.quan {
+  margin: 60px 0 0 0;
 }
