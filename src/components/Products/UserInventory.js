@@ -43,6 +43,7 @@ const UserInventory = (props) => {
             inStock={product.inStock}
             quantity={product.quantity}
             cartId={props.cartId}
+            inCart={props.inCart}
           />
         ))}
       </div>

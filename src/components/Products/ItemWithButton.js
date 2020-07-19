@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import { pushToCart } from './../../api/cartIndex'
-const Item = ({ name, price, description, imageUrl, category, quantity, id, cartId }) => {
+const Item = ({ name, price, description, imageUrl, category, quantity, id, cartId, inCart }) => {
   const containerStyle = {
     border: '1px solid black'
   }
+  const [inCart, setInCart] = useState(false)
   // const arrayOfProducts = []
   const addToCart = (event) => {
     event.preventDefault()
@@ -12,8 +13,10 @@ const Item = ({ name, price, description, imageUrl, category, quantity, id, cart
     // which recieves a cart id and a product id
     pushToCart(cartId, id)
       .then(res => console.log(res))
+      .then(() => setIncart(true))
       .catch(() => console.log('Huh.  Keep at it.'))
   }
+
   /*  {productsArray.map(product => (
     <Item
       key={product.name}
@@ -26,6 +29,14 @@ const Item = ({ name, price, description, imageUrl, category, quantity, id, cart
       quantity={product.quantity}
     />
     ))} */
+  if (!inCart) {
+    return <Button onClick={addToCart}
+      variant="primary"
+      type="submit"
+    >
+      Add to Cart
+    </Button>
+  }
 
   return (
     <div style={containerStyle}>
@@ -34,12 +45,15 @@ const Item = ({ name, price, description, imageUrl, category, quantity, id, cart
       <h3>Price: {price}</h3>
       <p>Description: {description}</p>
       <h5>{category}</h5>
-      <Button onClick={addToCart}
-        variant="primary"
-        type="submit"
-      >
-        Add to Cart
-      </Button>
+        <Button onClick={addToCart}
+          variant="primary"
+          type="submit"
+        >
+          Add to Cart
+        </Button>
+      } else {
+        <p>Already In </p>
+      }
     </div>
   )
 }
