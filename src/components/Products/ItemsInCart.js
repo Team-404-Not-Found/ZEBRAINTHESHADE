@@ -40,7 +40,7 @@ const ItemsInCart = props => {
           />
         ))}
       </div>
-      <CheckoutElement/>
+      <CheckoutElement />
     </CartItem>
   )
 }

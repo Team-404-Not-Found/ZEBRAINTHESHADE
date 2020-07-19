@@ -12,6 +12,7 @@ const ItemStyling = ({ name, price, imageUrl, quantity, id, cartId }) => {
     setQuantity(prevQuan => {
       const updatedQuan = { [event.target.name]: event.target.value }
       const newQuan = Object.assign({}, prevQuan, updatedQuan)
+      console.log(newQuan)
       return newQuan
     })
   }
