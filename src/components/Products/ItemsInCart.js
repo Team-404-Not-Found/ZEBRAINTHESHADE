@@ -36,6 +36,7 @@ const ItemsInCart = props => {
             price={product.price}
             imageUrl={product.imageUrl}
             quantity={product.quantity}
+            cartId={props.cartId}
           />
         ))}
       </div>
