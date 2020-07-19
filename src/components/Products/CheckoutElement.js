@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
-import { handleChange } from './ItemStyling'
+// import { handleChange } from './ItemStyling'
 const CheckoutElement = ({ price, quantity, id }) => {
   const [subTotal, setSubTotal] = useState(0)
   const handleChangeSubTotal = (newQuan, price) => {
-    handleChange(newQuan)
     console.log(newQuan, ' this is quan')
     console.log(price, ' this is Price')
     const subTotal = setSubTotal(newQuan * price)
