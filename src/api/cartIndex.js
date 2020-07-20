@@ -57,11 +57,11 @@ export const pushToHistory = (data, id) => {
   })
 }
 
-export const destroyItemInCart = (cartId, prodId) => {
-  console.log(prodId, 'this is prodId')
-  console.log(cartId, 'this cart id')
-  return axios({
-    url: 'https://protected-gorge-91362.herokuapp.com/carts/' + cartId + '/item/' + prodId,
-    method: 'DELETE'
-  })
-}
+// export const destroyItemInCart = (cartId, prodId) => {
+//   console.log(prodId, 'this is prodId')
+//   console.log(cartId, 'this cart id')
+//   return axios({
+//     url: 'https://protected-gorge-91362.herokuapp.com/carts/' + cartId + '/item/' + prodId,
+//     method: 'DELETE'
+//   })
+// }
