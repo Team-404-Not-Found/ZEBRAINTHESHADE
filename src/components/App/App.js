@@ -15,7 +15,7 @@ import ProductCreate from '../ProductCreate/ProductCreate'
 import ItemsInCart from '../Products/ItemsInCart'
 import OrderHistory from '../Products/OrderHistory'
 import CheckoutForm from '../Payment/CheckoutForm'
-
+import OrderConfirmation from '../Payment/OrderConfirmation'
 class App extends Component {
   constructor () {
     super()
@@ -78,6 +78,7 @@ class App extends Component {
           <Route exact path='/' component={Inventory} />
           <Route exact path='/createProduct' component={ProductCreate} />
           <AuthenticatedRoute user={user} exact path='/cardinput' component={CheckoutForm} />
+          <AuthenticatedRoute user={user} exact path='/orderconfirmation' component={OrderConfirmation} />
         </main>
       </Fragment>
     )

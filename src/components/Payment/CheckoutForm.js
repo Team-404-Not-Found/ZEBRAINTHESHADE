@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button'
 
 import CardSection from './CardSection'
 
-const CheckoutForm = () => {
+const CheckoutForm = props => {
   const [email, setEmail] = useState('')
   const [fakeAmount, setFakeAmount] = useState(2)
   const stripe = useStripe()
@@ -36,31 +36,16 @@ const CheckoutForm = () => {
           }
         }
       }))
-      .then(() => console.log('payment success'))
+      .then(() => console.log('payment success', props.location.cartArray))
+      .then(() => {
+        props.history.push({
+          pathname: '/orderconfirmation',
+          cartArray: props.location.cartArray,
+          userId: props.location.userId,
+          setCartArray: props.location.setCartArray
+        })
+      })
       .catch(() => console.log('payments failed'))
-    // const result = await stripe.confirmCardPayment('{CLIENT_SECRET}', {
-    //   payment_method: {
-    //     card: elements.getElement(CardElement),
-    //     billing_details: {
-    //       name: 'Jenny Rosen'
-    //     }
-    //   }
-    // })
-
-    // if (result.error) {
-    //   // Show error to your customer (e.g., insufficient funds)
-    //   console.log(result.error.message)
-    // } else {
-    //   // The payment has been processed!
-    //   if (result.paymentIntent.status === 'succeeded') {
-    //     console.log("VICTORYYY")
-    //     // Show a success message to your customer
-    //     // There's a risk of the customer closing the window before callback
-    //     // execution. Set up a webhook or plugin to listen for the
-    //     // payment_intent.succeeded event that handles any business critical
-    //     // post-payment actions.
-    //   }
-    // }
   }
 
   return (
