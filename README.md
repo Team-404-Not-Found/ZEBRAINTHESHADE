@@ -6,7 +6,9 @@
 
 ## Planning Story
 
-### MVP User Stories:
+Welcome to ZeaBra in The Shade e-shopping market. Thank you to visit our page. Our shopping web site will allow you to visit our products but visitor will be required for the sign up or sign in to add the product to the cart or make a payment.In addition user can add the item to the cart and update the item quantities and delete the items from the cart if user not happy with our product. Later user can sign out and don't worry we still keep your products in your cart, you won't lose them! Hope all client enjoy our ZeaBra in the shade e-market.
+
+### User Stories:
 
 - As an unregistered user, I would like to sign up with email and password.
 - As a registered user, I would like to sign in with email and password.
@@ -22,23 +24,25 @@
 ### Technologies Used
 
 - React
-- HTML/CSS
+- HTML/SCSS
 - Bootstrap
 - Javascript
 - Express API
+- Stripe
 
 ## Images
 
----
+This is our wireframe planning before we code. The page on web application might look some different.
 
 #### WireFrame
 
 ![HomePage-Wireframe](WireFrames/Home-page.png)
 
-#### ERD
-ERD - <WireFrames/ecommerceERD.JPG>
+![Signup-Wireframe](WireFrames/After-signup-Page.png)
+
+![Will-Product-Wireframe](WireFrames/View-Product-Page.png)
+
 
 ### Unsolved Problems
 
-- a
-- b
+- We need to add more styling to make the page look nice.
