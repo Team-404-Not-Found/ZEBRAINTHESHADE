@@ -36,6 +36,7 @@ const CheckoutForm = props => {
           }
         }
       }))
+      // add comment "Payment successful"
       .then(() => console.log('payment success', props.location.cartArray))
       .then(() => {
         props.history.push({
@@ -45,6 +46,7 @@ const CheckoutForm = props => {
           setCartArray: props.location.setCartArray
         })
       })
+      // add comment "Payment failed. Try again."
       .catch(() => console.log('payments failed'))
   }
 
