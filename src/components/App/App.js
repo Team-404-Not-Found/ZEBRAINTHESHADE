@@ -14,6 +14,7 @@ import UserInventory from '../Products/UserInventory'
 import ProductCreate from '../ProductCreate/ProductCreate'
 import ItemsInCart from '../Products/ItemsInCart'
 import OrderHistory from '../Products/OrderHistory'
+import CheckoutForm from '../Payment/CheckoutForm'
 
 class App extends Component {
   constructor () {
@@ -76,6 +77,7 @@ class App extends Component {
           )} />
           <Route exact path='/' component={Inventory} />
           <Route exact path='/createProduct' component={ProductCreate} />
+          <AuthenticatedRoute user={user} exact path='/cardinput' component={CheckoutForm} />
         </main>
       </Fragment>
     )

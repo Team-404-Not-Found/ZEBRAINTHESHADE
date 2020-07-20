@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import './../../index.scss'
 import CartItem from './CartItems'
-import { getCart, pushToHistory, clearCart } from '../../api/cartIndex'
+import { getCart } from '../../api/cartIndex'
 import ItemStyling from './ItemStyling'
-// import { Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+
 const ItemsInCart = props => {
-  console.log(props, 'prop in ItemInCart')
   // onClick -> give us product info, including cartID and OwnerID.
   // need cartID and and productID in order to make API call.
   // When we call this component, we need to pass props 1. cartID 2. productID 3. Inventory Quantity
@@ -22,31 +22,7 @@ const ItemsInCart = props => {
   // on success, push to api
   const [cartArray, setCartArray] = useState([])
   const test = event => {
-    // create holding object to popoulate orderHistory schema
-    let containerObject = {}
-    event.preventDefault()
-    console.log(cartArray)
-    // populate the keys that the orderHistory schema needs
-    cartArray.map(item => {
-      containerObject = {
-        productId: item._id,
-        name: item.name,
-        imageUrl: item.imageUrl,
-        receiptNumber: 'some String from stripe'
-      }
-      pushToHistory(containerObject, props.user._id)
-        .then(() => console.log('successfully added to history. Redirect the user from this line.'))
-        .catch(() => console.log('failed to push items to user history'))
-      for (let cartQuantity = cartArray.length - 1; cartQuantity > 0; cartQuantity--) {
-        clearCart(props.user._id)
-          .then(() => setCartArray([]))
-          .then(() => console.log('cart is empty'))
-          .catch(() => console.log('failed to reset cart'))
-      }
-    })
-    // give object to order history API call
-    // reset user's cart to be empty (products subdoc in cart)
-    // need to set inCart value back to false
+    props.history.push('/cardinput')
   }
   useEffect(() => {
     getCart(props.user._id)
@@ -73,4 +49,4 @@ const ItemsInCart = props => {
     </CartItem>
   )
 }
-export default ItemsInCart
+export default withRouter(ItemsInCart)
