@@ -3,7 +3,9 @@ import './../../index.scss'
 import CartItem from './CartItems'
 import { getCart, pushToHistory, clearCart } from '../../api/cartIndex'
 import ItemStyling from './ItemStyling'
+// import { Redirect } from 'react-router-dom'
 const ItemsInCart = props => {
+  console.log(props, 'prop in ItemInCart')
   // onClick -> give us product info, including cartID and OwnerID.
   // need cartID and and productID in order to make API call.
   // When we call this component, we need to pass props 1. cartID 2. productID 3. Inventory Quantity
