@@ -3,6 +3,7 @@ import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js'
 import { payment } from '../../api/swipe.js'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import messages from '../AutoDismissAlert/messages'
 
 import CardSection from './CardSection'
 
@@ -46,8 +47,17 @@ const CheckoutForm = props => {
           setCartArray: props.location.setCartArray
         })
       })
+      // .then(() => props.msgAlert({
+      //   heading: 'Payment Success!',
+      //   message: messages.paymentSuccess,
+      //   variant: 'success'
+      // }))
       // add comment "Payment failed. Try again."
-      .catch(() => console.log('payments failed'))
+      .catch(() => props.msgAlert({
+        heading: 'Payment failed',
+        message: messages.paymentFailure,
+        variant: 'success'
+      }))
   }
 
   return (

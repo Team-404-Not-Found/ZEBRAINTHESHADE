@@ -24,15 +24,15 @@ const UserInventory = (props) => {
   const containerStyle = {
     display: 'flex',
     flexWrap: 'Wrap',
-    padding: '30px',
-    border: '1px solid black'
+    padding: '30px'
   }
   return (
     <div>
-      <h2>All Products</h2>
+      <h2 className='product-header'>Ready To Shop? {props.user.email}</h2>
       <div style = {containerStyle} >
         {productsArray.map(product => (
           <ItemWithButton
+            msgAlert={props.msgAlert}
             key={product.name}
             id={product._id}
             name={product.name}
@@ -43,7 +43,7 @@ const UserInventory = (props) => {
             inStock={product.inStock}
             quantity={product.quantity}
             cartId={props.cartId}
-            inCart={props.inCart}
+            inCart={product.inCart}
           />
         ))}
       </div>
