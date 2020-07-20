@@ -4,6 +4,7 @@ import CartItem from './CartItems'
 import { getCart } from '../../api/cartIndex'
 import ItemStyling from './ItemStyling'
 import { withRouter } from 'react-router-dom'
+import messages from '../AutoDismissAlert/messages'
 
 const ItemsInCart = props => {
   // onClick -> give us product info, including cartID and OwnerID.
@@ -35,6 +36,11 @@ const ItemsInCart = props => {
       .then(res => setCartArray(res.data.cart.products))
       // add comment "Edit or review your cart. Proceed to checkout when you are ready!"
       .then(() => console.log('this worked'))
+      .then(() => props.msgAlert({
+        heading: 'Review your Cart',
+        message: messages.cartArraySuccess,
+        variant: 'success'
+      }))
       // add comment "Oops something is wrong with your cart"
       .catch(() => console.log('failed to complete SHOW request for cart'))
   }, [])

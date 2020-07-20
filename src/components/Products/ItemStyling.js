@@ -52,7 +52,8 @@ const ItemStyling = ({ name, price, imageUrl, quantity, id, cartId }) => {
           />
         </Form.Group>
         <Button
-          variant="primary"
+          className='remove-btn'
+          variant="dark"
           type="submit"
         //  onClick={destroyItem}
         >

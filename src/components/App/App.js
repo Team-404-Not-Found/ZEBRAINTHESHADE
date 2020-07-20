@@ -67,17 +67,19 @@ class App extends Component {
             <CartItems />
           )} />
           <AuthenticatedRoute user={user} path='/user-inventory' render={() => (
-            <UserInventory cartId={this.state.cartId}/>
+            <UserInventory msgAlert={this.msgAlert} user={user} cartId={this.state.cartId}/>
           )} />
           <AuthenticatedRoute user={user} path='/item-in-cart' render={() => (
-            <ItemsInCart user={user} cartId={this.state.cartId}/>
+            <ItemsInCart msgAlert={this.msgAlert} user={user} cartId={this.state.cartId}/>
           )} />
           <AuthenticatedRoute user={user} path='/order-history' render={() => (
             <OrderHistory user={user}/>
           )} />
           <Route exact path='/' component={Inventory} />
           <Route exact path='/createProduct' component={ProductCreate} />
-          <AuthenticatedRoute user={user} exact path='/cardinput' component={CheckoutForm} />
+          <AuthenticatedRoute user={user} exact path='/cardinput' render={() => (
+            <CheckoutForm msgAlert={this.msgAlert} user={user}/>
+          )} />
           <AuthenticatedRoute user={user} exact path='/orderconfirmation' component={OrderConfirmation} />
         </main>
       </Fragment>
