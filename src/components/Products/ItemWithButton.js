@@ -11,7 +11,9 @@ const ItemWithButton = ({ name, price, description, imageUrl, category, quantity
     // calling our pushToCart API CALL
     // which recieves a cart id and a product id
     pushToCart(cartId, id)
+    // add comment "Item added to your Cart"
       .then(res => console.log(res))
+      // add comment "Failed to add item to your cart"
       .catch(() => console.log('Huh.  Keep at it.'))
   }
 
