@@ -33,7 +33,7 @@
 
 #### WireFrame
 
-LandingPage - <WireFrames/LandingPage.png>
+![HomePage-Wireframe](WireFrames/Home-page.png)
 
 #### ERD
 ERD - <WireFrames/ecommerceERD.JPG>
