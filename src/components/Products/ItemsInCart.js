@@ -21,8 +21,13 @@ const ItemsInCart = props => {
   // Add receiptID to array that needs to be added to api.
   // on success, push to api
   const [cartArray, setCartArray] = useState([])
-  const test = event => {
-    props.history.push('/cardinput')
+  const handleCheckout = event => {
+    props.history.push({
+      pathname: '/cardinput',
+      cartArray: cartArray,
+      userId: props.user._id,
+      setCartArray: setCartArray
+    })
   }
   useEffect(() => {
     getCart(props.user._id)
@@ -45,7 +50,7 @@ const ItemsInCart = props => {
           />
         ))}
       </div>
-      <button onClick={test}>Print the cart</button>
+      <button onClick={handleCheckout}>Proceed to Checkout</button>
     </CartItem>
   )
 }
