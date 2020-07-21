@@ -1,8 +1,8 @@
 ## Important Links
 
-- [API Repo](https://github.com/Team-404-Not-Found/404-API)
-- [Deployed API](https://protected-gorge-91362.herokuapp.com)
-- [Deployed Client](https://team-404-not-found.github.io/ZEBRAINTHESHADE/#/)
+- [API Repo](www.link.com)
+- [Deployed API](www.link.com)
+- [Deployed Client](www.link.com)
 
 ## Planning Story
 
