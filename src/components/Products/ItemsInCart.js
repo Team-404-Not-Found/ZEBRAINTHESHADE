@@ -24,19 +24,20 @@ const ItemsInCart = props => {
   // Add receiptID to array that needs to be added to api.
   // on success, push to api
   const [cartArray, setCartArray] = useState([])
-  const [total, setTotalArray] = useState([])
+  const [initialCart, setInitialCartArray] = useState([])
 
-  const subTotal = value => {
-    setTotalArray(total.concat(value))
-  }
+  // const subTotal = value => {
+  //   setTotalArray(total.concat(value))
+  // }
 
   const handleCheckout = event => {
-    props.history.push({
-      pathname: '/cardinput',
-      cartArray: cartArray,
-      userId: props.user._id,
-      setCartArray: setCartArray
-    })
+    console.log(initialCart.length)
+    // props.history.push({
+    //   pathname: '/cardinput',
+    //   cartArray: cartArray,
+    //   userId: props.user._id,
+    //   setCartArray: setCartArray
+    // })
   }
   useEffect(() => {
     getCart(props.user._id)
@@ -49,6 +50,7 @@ const ItemsInCart = props => {
         message: messages.cartArraySuccess,
         variant: 'success'
       }))
+      .then(() => console.log('1st'))
       // add comment "Oops something is wrong with your cart"
       .catch(() => console.log('failed to complete SHOW request for cart'))
   }, [])
@@ -65,13 +67,16 @@ const ItemsInCart = props => {
               imageUrl={product.imageUrl}
               quantity={product.quantity}
               cartId={props.cartId}
-              pushSubTotal={subTotal}
+              initialCart={initialCart}
+              setInitialCartArray={setInitialCartArray}
             />
           ))}
         </Form.Group>
       </div>
       <Button onClick={handleCheckout}>Proceed to Checkout</Button>
-      <h3>the total is: {total.forEach(total => console.log(total))}</h3>
+      {initialCart.forEach(value => (
+        <h3>{value}</h3>
+      ))}
     </CartItem>
   )
 }

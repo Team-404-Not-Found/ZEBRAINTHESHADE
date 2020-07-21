@@ -7,10 +7,19 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-const ItemStyling = ({ name, price, imageUrl, quantity, id, cartId, pushSubTotal }) => {
+const ItemStyling = ({ name, price, imageUrl, quantity, id, cartId, initialCart, setInitialCartArray }) => {
   const [quant, setQuantity] = useState(1)
   const [cost, setCost] = useState(null)
   const [deleted, setDeleted] = useState(false)
+
+  useEffect(() => {
+    const initialValue = quant * price
+    setInitialCartArray([...initialCart, {
+      id: initialCart.length,
+      value: initialValue
+    }])
+    console.log(initialValue, 'second')
+  }, [])
   useEffect(() => {
     setCost(quant * price)
     // pushSubTotal(total => total.concat(cost))
