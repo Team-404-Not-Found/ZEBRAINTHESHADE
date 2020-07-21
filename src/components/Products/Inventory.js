@@ -27,7 +27,6 @@ const Inventory = () => {
 
   return (
     <div>
-      <h2>All Products</h2>
       <h2 className='product-header'>Trust us it is a good price! Please sign in to Shop Our Product</h2>
       <div style = {containerStyle} >
         {productsArray.map(product => (
