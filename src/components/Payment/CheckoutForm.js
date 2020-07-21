@@ -27,11 +27,9 @@ const CheckoutForm = props => {
     setFakeAmount(props.location.total)
     payment(email, fakeAmount)
       .then(res => {
-        console.log('send back client secret')
         return res.data['client_secret']
       })
       .then(res => {
-        console.log(res)
         return stripe.confirmCardPayment(res, {
           payment_method: {
             card: elements.getElement(CardElement),
@@ -41,7 +39,6 @@ const CheckoutForm = props => {
           }
         })
       })
-      .then(() => console.log('payment success'))
       .then(() => {
         props.history.push({
           pathname: '/orderconfirmation',

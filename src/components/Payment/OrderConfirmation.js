@@ -12,7 +12,6 @@ const OrderConfirmation = props => {
   const [orderNum, setOrderNum] = useState(null)
   // create holding object to popoulate orderHistory schema
   let containerObject = {}
-  console.log(cartArray)
   // populate the keys that the orderHistory schema needs
   useEffect(() => {
     cartArray.map(item => {

@@ -9,7 +9,6 @@ export const productsIndex = () => {
 }
 
 export const productsCreate = item => {
-  console.log(item)
   return axios({
     url: apiUrl + '/products',
     method: 'POST',
