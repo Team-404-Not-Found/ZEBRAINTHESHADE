@@ -24,34 +24,37 @@ const ItemsInCart = props => {
   // Add receiptID to array that needs to be added to api.
   // on success, push to api
   const [cartArray, setCartArray] = useState([])
-  const [total, setTotalArray] = useState([])
-
-  const subTotal = value => {
-    setTotalArray(total.concat(value))
-  }
+  const [cartCost, setCartCost] = useState([])
+  const [total, setTotal] = useState(null)
 
   const handleCheckout = event => {
     props.history.push({
       pathname: '/cardinput',
       cartArray: cartArray,
       userId: props.user._id,
-      setCartArray: setCartArray
+      setCartArray: setCartArray,
+      total: total
     })
   }
   useEffect(() => {
     getCart(props.user._id)
       // .then(res => setCartArray(res.data.cart.products.toString()))
       .then(res => setCartArray(res.data.cart.products))
-      // add comment "Edit or review your cart. Proceed to checkout when you are ready!"
-      .then(() => console.log('this worked'))
-      .then(() => props.msgAlert({
-        heading: 'Review your Cart',
-        message: messages.cartArraySuccess,
-        variant: 'success'
-      }))
       // add comment "Oops something is wrong with your cart"
-      .catch(() => console.log('failed to complete SHOW request for cart'))
+      .catch(() => props.msgAlert({
+        heading: 'Error loading your cart',
+        message: messages.cartArrayFailure,
+        variant: 'danger'
+      }))
   }, [])
+
+  useEffect(() => {
+    if (cartCost.length > 0) {
+      const subtotal = cartCost.map(a => a.value)
+      const sum = subtotal.reduce((a, b) => a + b, 0)
+      setTotal(sum)
+    }
+  }, [cartCost])
   return (
     <CartItem>
       <div>
@@ -65,13 +68,14 @@ const ItemsInCart = props => {
               imageUrl={product.imageUrl}
               quantity={product.quantity}
               cartId={props.cartId}
-              pushSubTotal={subTotal}
+              cartCost={cartCost}
+              setCartCost={setCartCost}
             />
           ))}
         </Form.Group>
+        <h3>Total is: ${total}</h3>
       </div>
       <Button onClick={handleCheckout}>Proceed to Checkout</Button>
-      <h3>the total is: {total.forEach(total => console.log(total))}</h3>
     </CartItem>
   )
 }

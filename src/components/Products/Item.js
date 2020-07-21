@@ -14,9 +14,9 @@ const Item = ({ name, price, description, imageUrl, category, quantity, id }) =>
         <img src={imageUrl} alt={name}/>
       </div>
       <h2>Name: {name}</h2>
-      <h3>Price: {price}</h3>
-      <p>Description: {description}</p>
-      <h5>{category}</h5>
+      { price && <h3>Price: {price}</h3>}
+      { description && <p>Description: {description}</p>}
+      { category && <h5>{category}</h5> }
     </Col>
   )
 }

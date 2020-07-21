@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { destroyItemInCart } from '../../api/cartIndex'
+import { destroyItemInCart, itemInCart } from '../../api/cartIndex'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { Redirect } from 'react-router-dom'
@@ -7,14 +7,33 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-const ItemStyling = ({ name, price, imageUrl, quantity, id, cartId, pushSubTotal }) => {
+const ItemStyling = ({ name, price, imageUrl, quantity, id, cartId, cartCost, setCartCost }) => {
   const [quant, setQuantity] = useState(1)
   const [cost, setCost] = useState(null)
   const [deleted, setDeleted] = useState(false)
+  // sets initial cost of item on initial render
   useEffect(() => {
     setCost(quant * price)
     // pushSubTotal(total => total.concat(cost))
   }, [cost])
+  // initializes array of cost of products
+  useEffect(() => {
+    const initialValue = quant * price
+    setCartCost(cartCost => [...cartCost, {
+      id: id,
+      value: initialValue
+    }])
+  }, [])
+  useEffect(() => {
+    const elementIndex = cartCost.findIndex(element => element.id === id)
+    if (elementIndex !== -1) {
+      const newArray = [...cartCost]
+      newArray[elementIndex] = { ...newArray[elementIndex], value: cost }
+      setCartCost(newArray)
+    }
+    console.log(elementIndex)
+  }, [cost])
+
   const handleChange = event => {
     event.persist()
     setQuantity(prevQuant => {
@@ -27,6 +46,8 @@ const ItemStyling = ({ name, price, imageUrl, quantity, id, cartId, pushSubTotal
     event.preventDefault()
     destroyItemInCart(cartId, id)
       .then(res => setDeleted(true))
+      .then(() => itemInCart(id, false))
+      .then(() => console.log('deleted'))
       .catch(() => console.log('failed to delete'))
   }
   if (deleted) {

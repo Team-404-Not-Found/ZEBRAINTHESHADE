@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './../../index.scss'
-import { pushToHistory, clearCart } from '../../api/cartIndex'
+import { pushToHistory, clearCart, itemInCart } from '../../api/cartIndex'
+import Item from '../Products/Item'
 
 // THIS FUNCTION NEEDS TO RECEIVE CARTARRY and onwerID FROM ITEMSINCART.JS
 const OrderConfirmation = props => {
@@ -27,6 +28,7 @@ const OrderConfirmation = props => {
         .then(() => console.log('successfully added to history. Redirect the user from this line.'))
         .catch(() => console.log('failed to push items to user history'))
       for (let cartQuantity = cartArray.length - 1; cartQuantity > 0; cartQuantity--) {
+        itemInCart(cartArray[cartQuantity]._id, true)
         clearCart(userId)
           .then(() => setCartArray([]))
           // add comment "Your cart is empty"
@@ -46,6 +48,14 @@ const OrderConfirmation = props => {
     <div>
       <h2>Order has been successfully placed</h2>
       <h3>Your order number is {orderNum}</h3>
+      {cartArray.map((item, i) => (
+        <Item
+          key={i}
+          id={item._id}
+          name={item.name}
+          imageUrl={item.imageUrl}
+        />
+      ))}
     </div>
   )
 
