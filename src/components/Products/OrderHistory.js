@@ -1,7 +1,6 @@
 import React from 'react'
 
 const OrderHistory = props => {
-  console.log(props.user.orderHistory)
   const orderHistory = props.user.orderHistory.map((order, i) => (
     <div key={i}>
       <div className='item-box'>

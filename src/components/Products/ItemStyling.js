@@ -31,7 +31,6 @@ const ItemStyling = ({ name, price, imageUrl, quantity, id, cartId, cartCost, se
       newArray[elementIndex] = { ...newArray[elementIndex], value: cost }
       setCartCost(newArray)
     }
-    console.log(elementIndex)
   }, [cost])
 
   const handleChange = event => {
@@ -45,9 +44,11 @@ const ItemStyling = ({ name, price, imageUrl, quantity, id, cartId, cartCost, se
   const destroyItem = event => {
     event.preventDefault()
     destroyItemInCart(cartId, id)
-      .then(res => setDeleted(true))
+      .then(res => {
+        setDeleted(true)
+        res.sendStatus(204)
+      })
       .then(() => itemInCart(id, false))
-      .then(() => console.log('deleted'))
       .catch(() => console.log('failed to delete'))
   }
   if (deleted) {
