@@ -40,15 +40,12 @@ const ItemsInCart = props => {
     getCart(props.user._id)
       // .then(res => setCartArray(res.data.cart.products.toString()))
       .then(res => setCartArray(res.data.cart.products))
-      // add comment "Edit or review your cart. Proceed to checkout when you are ready!"
-      .then(() => console.log('this worked'))
-      .then(() => props.msgAlert({
-        heading: 'Review your Cart',
-        message: messages.cartArraySuccess,
-        variant: 'success'
-      }))
       // add comment "Oops something is wrong with your cart"
-      .catch(() => console.log('failed to complete SHOW request for cart'))
+      .catch(() => props.msgAlert({
+        heading: 'Error loading your cart',
+        message: messages.cartArrayFailure,
+        variant: 'danger'
+      }))
   }, [])
 
   useEffect(() => {

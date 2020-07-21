@@ -22,7 +22,6 @@ export const getCart = id => {
 }
 
 export const pushToCart = (cartId, prodId) => {
-  console.log(cartId, 'line 24')
   return axios({
     url: apiUrl + '/carts/' + cartId,
     method: 'POST',
@@ -33,8 +32,19 @@ export const pushToCart = (cartId, prodId) => {
     }
   })
 }
+
+export const itemInCart = (prodId, boolean) => {
+  return axios({
+    url: apiUrl + '/products/' + prodId,
+    method: 'PATCH',
+    data: {
+      product: {
+        inCart: boolean
+      }
+    }
+  })
+}
 export const clearCart = cartId => {
-  console.log(cartId)
   return axios({
     url: apiUrl + '/carts/' + cartId,
     method: 'DELETE'
@@ -42,7 +52,6 @@ export const clearCart = cartId => {
 }
 // sending data to order history using userID
 export const pushToHistory = (data, id) => {
-  console.log(data)
   return axios({
     url: apiUrl + '/orders/' + id,
     method: 'POST',
@@ -58,10 +67,8 @@ export const pushToHistory = (data, id) => {
 }
 
 export const destroyItemInCart = (cartId, prodId) => {
-  console.log(prodId, 'this is prodId')
-  console.log(cartId, 'this cart id')
   return axios({
-    url: 'https://protected-gorge-91362.herokuapp.com/carts/' + cartId + '/item/' + prodId,
+    url: apiUrl + '/carts/' + cartId + '/item/' + prodId,
     method: 'DELETE'
   })
 }

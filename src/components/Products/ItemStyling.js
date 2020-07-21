@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { destroyItemInCart } from '../../api/cartIndex'
+import { destroyItemInCart, itemInCart } from '../../api/cartIndex'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { Redirect } from 'react-router-dom'
@@ -46,6 +46,8 @@ const ItemStyling = ({ name, price, imageUrl, quantity, id, cartId, cartCost, se
     event.preventDefault()
     destroyItemInCart(cartId, id)
       .then(res => setDeleted(true))
+      .then(() => itemInCart(id, false))
+      .then(() => console.log('deleted'))
       .catch(() => console.log('failed to delete'))
   }
   if (deleted) {
