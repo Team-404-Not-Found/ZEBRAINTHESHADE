@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react'
-// import { destroyItemInCart } from '../../api/cartIndex'
+import { destroyItemInCart } from '../../api/cartIndex'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-// import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 const ItemStyling = ({ name, price, imageUrl, quantity, id, cartId, pushSubTotal }) => {
   const [quant, setQuantity] = useState(1)
   const [cost, setCost] = useState(null)
-  //  const [deleted, setDeleted] = useState(false)
+  const [deleted, setDeleted] = useState(false)
+  useEffect(() => {
+    setCost(quant * price)
+    // pushSubTotal(total => total.concat(cost))
+  }, [cost])
   const handleChange = event => {
     event.persist()
     setQuantity(prevQuant => {
@@ -16,25 +20,19 @@ const ItemStyling = ({ name, price, imageUrl, quantity, id, cartId, pushSubTotal
       return updatedQuant
     })
   }
-  // const destroyItem = event => {
-  //   event.preventDefault()
-  //   destroyItemInCart(cartId, id)
-  //     // .then(res => setCartArray(res.data.cart.products.toString()))
-  //     .then(res => console.log('Deleted', res))
-  //     .then(() => setDeleted(true))
-  //     .catch(() => console.log('failed to delete'))
-  // }
-  // if (deleted) {
-  //   return (
-  //     <Redirect to={{
-  //       pathname: '/item-in-cart', state: { msg: 'Book succesfully deleted!' }
-  //     }} />
-  //   )
-  // }
-  useEffect(() => {
-    setCost(quant * price)
-    // pushSubTotal(total => total.concat(cost))
-  }, [cost])
+  const destroyItem = event => {
+    event.preventDefault()
+    destroyItemInCart(cartId, id)
+      .then(res => setDeleted(true))
+      .catch(() => console.log('failed to delete'))
+  }
+  if (deleted) {
+    return (
+      <Redirect to={{
+        pathname: '/item-in-cart', state: { msg: 'Item succesfully deleted!' }
+      }} />
+    )
+  }
 
   return (
     <div>
@@ -61,7 +59,7 @@ const ItemStyling = ({ name, price, imageUrl, quantity, id, cartId, pushSubTotal
           className='remove-btn'
           variant="dark"
           type="submit"
-        //  onClick={destroyItem}
+          onClick={destroyItem}
         >
       Remove
         </Button>
