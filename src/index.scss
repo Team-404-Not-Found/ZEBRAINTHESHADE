@@ -4,7 +4,7 @@
   justify-content: space-evenly;
   border: solid black 1px;
 }
-.item-box {
+.row-item {
   background-color: #d8cfd0;
   color:#413f3d;
   display: flex;
@@ -12,23 +12,23 @@
 justify-content: space-evenly;
   margin: 10px;
   padding: 0 20px;
-
 }
 .itemImg {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
+  margin: 80px auto;
 }
-.amount {
+.column-price {
   padding: 80px 0;
   text-align: center;
-  font-size: 24px;
+  font-size: 20px;
 }
 .btn-info {
   margin: 80px 0;
   text-align: center;
 }
 .remove-btn {
-  margin: 100px 0;
+  margin: 100px;
 }
 .cartName {
   text-align: center;
@@ -61,9 +61,6 @@ max-height: 100%;
 .checkout-section {
   border: solid #f2f3f4 1px;
   border-style: groove;
-}
-.quan {
-  margin: 60px 0 0 0;
 }
 
 // **** Payment Stylesheet ****
