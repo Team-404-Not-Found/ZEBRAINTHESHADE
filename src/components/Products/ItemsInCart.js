@@ -5,6 +5,8 @@ import { getCart } from '../../api/cartIndex'
 import ItemStyling from './ItemStyling'
 import { withRouter } from 'react-router-dom'
 import messages from '../AutoDismissAlert/messages'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 const ItemsInCart = props => {
   // onClick -> give us product info, including cartID and OwnerID.
@@ -22,6 +24,12 @@ const ItemsInCart = props => {
   // Add receiptID to array that needs to be added to api.
   // on success, push to api
   const [cartArray, setCartArray] = useState([])
+  const [total, setTotalArray] = useState([])
+
+  const subTotal = value => {
+    setTotalArray(total.concat(value))
+  }
+
   const handleCheckout = event => {
     props.history.push({
       pathname: '/cardinput',
@@ -47,18 +55,22 @@ const ItemsInCart = props => {
   return (
     <CartItem>
       <div>
-        {cartArray.map(product => (
-          <ItemStyling
-            key={product.name}
-            id={product._id}
-            name={product.name}
-            price={product.price}
-            imageUrl={product.imageUrl}
-            quantity={product.quantity}
-          />
-        ))}
+        <Form.Group controlId="quantity">
+          {cartArray.map(product => (
+            <ItemStyling
+              key={product.name}
+              id={product._id}
+              name={product.name}
+              price={product.price}
+              imageUrl={product.imageUrl}
+              quantity={product.quantity}
+              pushSubTotal={subTotal}
+            />
+          ))}
+        </Form.Group>
       </div>
-      <button onClick={handleCheckout}>Proceed to Checkout</button>
+      <Button onClick={handleCheckout}>Proceed to Checkout</Button>
+      <h3>the total is: {total.forEach(total => console.log(total))}</h3>
     </CartItem>
   )
 }
