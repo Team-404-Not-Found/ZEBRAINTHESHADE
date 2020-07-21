@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js'
 import { payment } from '../../api/swipe.js'
+import { withRouter } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import messages from '../AutoDismissAlert/messages'
 
-import CardSection from './CardSection'
+import CardInput from './CardSection'
 
 const CheckoutForm = props => {
   const [email, setEmail] = useState('')
@@ -23,22 +24,24 @@ const CheckoutForm = props => {
       // Make sure to disable form submission until Stripe.js has loaded.
       return
     }
-    setFakeAmount(200)
+    setFakeAmount(props.location.total)
     payment(email, fakeAmount)
       .then(res => {
         console.log('send back client secret')
         return res.data['client_secret']
       })
-      .then(res => stripe.confirmCardPayment(res, {
-        payment_method: {
-          card: elements.getElement(CardElement),
-          billing_details: {
-            email: email
+      .then(res => {
+        console.log(res)
+        return stripe.confirmCardPayment(res, {
+          payment_method: {
+            card: elements.getElement(CardElement),
+            billing_details: {
+              email: email
+            }
           }
-        }
-      }))
-      // add comment "Payment successful"
-      .then(() => console.log('payment success', props.location.cartArray))
+        })
+      })
+      .then(() => console.log('payment success'))
       .then(() => {
         props.history.push({
           pathname: '/orderconfirmation',
@@ -47,16 +50,16 @@ const CheckoutForm = props => {
           setCartArray: props.location.setCartArray
         })
       })
-      // .then(() => props.msgAlert({
-      //   heading: 'Payment Success!',
-      //   message: messages.paymentSuccess,
-      //   variant: 'success'
-      // }))
+      .then(() => props.msgAlert({
+        heading: 'Payment Success!',
+        message: messages.paymentSuccess,
+        variant: 'success'
+      }))
       // add comment "Payment failed. Try again."
       .catch(() => props.msgAlert({
         heading: 'Payment failed',
         message: messages.paymentFailure,
-        variant: 'success'
+        variant: 'danger'
       }))
   }
 
@@ -75,7 +78,7 @@ const CheckoutForm = props => {
           We&apos;ll never share your email with anyone else.
         </Form.Text>
       </Form.Group>
-      <CardSection />
+      <CardInput />
       <Button variant="rimary" type="submit" disabled={!stripe}>
         Confirm Order
       </Button>
@@ -83,4 +86,4 @@ const CheckoutForm = props => {
   )
 }
 
-export default CheckoutForm
+export default withRouter(CheckoutForm)

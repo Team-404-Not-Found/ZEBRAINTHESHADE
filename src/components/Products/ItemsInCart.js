@@ -28,13 +28,13 @@ const ItemsInCart = props => {
   const [total, setTotal] = useState(null)
 
   const handleCheckout = event => {
-    console.log([...cartCost])
-    // props.history.push({
-    //   pathname: '/cardinput',
-    //   cartArray: cartArray,
-    //   userId: props.user._id,
-    //   setCartArray: setCartArray
-    // })
+    props.history.push({
+      pathname: '/cardinput',
+      cartArray: cartArray,
+      userId: props.user._id,
+      setCartArray: setCartArray,
+      total: total
+    })
   }
   useEffect(() => {
     getCart(props.user._id)
@@ -47,7 +47,6 @@ const ItemsInCart = props => {
         message: messages.cartArraySuccess,
         variant: 'success'
       }))
-      .then(() => console.log([...cartCost], '1st'))
       // add comment "Oops something is wrong with your cart"
       .catch(() => console.log('failed to complete SHOW request for cart'))
   }, [])

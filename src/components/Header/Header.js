@@ -6,6 +6,7 @@ const authenticatedOptions = (
   <Fragment>
     <Nav.Link href="#user-inventory">Home</Nav.Link>
     <Nav.Link href="#item-in-cart">Cart</Nav.Link>
+    <Nav.Link href="#order-history">History</Nav.Link>
     <Nav.Link href="#change-password">Change Password</Nav.Link>
     <Nav.Link href="#sign-out">Sign Out</Nav.Link>
   </Fragment>

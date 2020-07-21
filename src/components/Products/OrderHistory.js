@@ -2,8 +2,8 @@ import React from 'react'
 
 const OrderHistory = props => {
   console.log(props.user.orderHistory)
-  const orderHistory = props.user.orderHistory.map(order => (
-    <div key={order.productId}>
+  const orderHistory = props.user.orderHistory.map((order, i) => (
+    <div key={i}>
       <div className='item-box'>
         <div className='itemImg'>
           <img src={order.imageUrl} alt={order.name} />
