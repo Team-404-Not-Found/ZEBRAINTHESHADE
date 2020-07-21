@@ -1,19 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 // import { destroyItemInCart } from '../../api/cartIndex'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 // import { Redirect } from 'react-router-dom'
 
-const ItemStyling = ({ name, price, imageUrl, quantity, id, cartId }) => {
-  const [quan, setQuantity] = useState(0)
+const ItemStyling = ({ name, price, imageUrl, quantity, id, cartId, pushSubTotal }) => {
+  const [quant, setQuantity] = useState(1)
+  const [cost, setCost] = useState(null)
   //  const [deleted, setDeleted] = useState(false)
   const handleChange = event => {
     event.persist()
-    setQuantity(prevQuan => {
-      const updatedQuan = { [event.target.name]: event.target.value }
-      const newQuan = Object.assign({}, prevQuan, updatedQuan)
-      console.log(newQuan)
-      return newQuan
+    setQuantity(prevQuant => {
+      const updatedQuant = event.target.value
+      setCost(updatedQuant * price)
+      return updatedQuant
     })
   }
   // const destroyItem = event => {
@@ -31,6 +31,11 @@ const ItemStyling = ({ name, price, imageUrl, quantity, id, cartId }) => {
   //     }} />
   //   )
   // }
+  useEffect(() => {
+    setCost(quant * price)
+    // pushSubTotal(total => total.concat(cost))
+  }, [cost])
+
   return (
     <div>
       <div className='item-box'>
@@ -38,19 +43,20 @@ const ItemStyling = ({ name, price, imageUrl, quantity, id, cartId }) => {
           <img src={imageUrl} alt={name} />
         </div>
         <p className='amount'>Name: {name}</p>
-        <p className='amount' name='price' value={quan.price}>Price:<span>$</span>{price}</p>
-        <Form.Group controlId="quantity">
-          <Form.Label className='quan'>Quantity:</Form.Label>
-          <Form.Control
-            required
-            name="quantity"
-            value={quan.quantity}
-            type="number"
-            min="1"
-            max={quantity}
-            onChange={handleChange}
-          />
-        </Form.Group>
+        <p className='amount' name='price'>Price:<span>$</span>{price}</p>
+        <Form.Label className='quan'>Quantity:</Form.Label>
+        <Form.Control
+          required
+          name="quantity"
+          value={quant}
+          type="number"
+          min="1"
+          max={quantity}
+          onChange={handleChange}
+        />
+        <Form.Text className="text-muted">
+          Price of items is: {cost}
+        </Form.Text>
         <Button
           className='remove-btn'
           variant="dark"
