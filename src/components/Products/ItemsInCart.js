@@ -4,6 +4,9 @@ import CartItem from './CartItems'
 import { getCart } from '../../api/cartIndex'
 import ItemStyling from './ItemStyling'
 import { withRouter } from 'react-router-dom'
+import messages from '../AutoDismissAlert/messages'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 const ItemsInCart = props => {
   // onClick -> give us product info, including cartID and OwnerID.
@@ -21,38 +24,58 @@ const ItemsInCart = props => {
   // Add receiptID to array that needs to be added to api.
   // on success, push to api
   const [cartArray, setCartArray] = useState([])
+  const [cartCost, setCartCost] = useState([])
+  const [total, setTotal] = useState(null)
+
   const handleCheckout = event => {
     props.history.push({
       pathname: '/cardinput',
       cartArray: cartArray,
       userId: props.user._id,
-      setCartArray: setCartArray
+      setCartArray: setCartArray,
+      total: total
     })
   }
   useEffect(() => {
     getCart(props.user._id)
       // .then(res => setCartArray(res.data.cart.products.toString()))
       .then(res => setCartArray(res.data.cart.products))
-      // add comment "Edit or review your cart. Proceed to checkout when you are ready!"
-      .then(() => console.log('this worked'))
       // add comment "Oops something is wrong with your cart"
-      .catch(() => console.log('failed to complete SHOW request for cart'))
+      .catch(() => props.msgAlert({
+        heading: 'Error loading your cart',
+        message: messages.cartArrayFailure,
+        variant: 'danger'
+      }))
   }, [])
+
+  useEffect(() => {
+    if (cartCost.length > 0) {
+      const subtotal = cartCost.map(a => a.value)
+      const sum = subtotal.reduce((a, b) => a + b, 0)
+      setTotal(sum)
+    }
+  }, [cartCost])
   return (
     <CartItem>
       <div>
-        {cartArray.map(product => (
-          <ItemStyling
-            key={product.name}
-            id={product._id}
-            name={product.name}
-            price={product.price}
-            imageUrl={product.imageUrl}
-            quantity={product.quantity}
-          />
-        ))}
+        <Form.Group controlId="quantity">
+          {cartArray.map(product => (
+            <ItemStyling
+              key={product.name}
+              id={product._id}
+              name={product.name}
+              price={product.price}
+              imageUrl={product.imageUrl}
+              quantity={product.quantity}
+              cartId={props.cartId}
+              cartCost={cartCost}
+              setCartCost={setCartCost}
+            />
+          ))}
+        </Form.Group>
+        <h3>Total is: ${total}</h3>
       </div>
-      <button onClick={handleCheckout}>Proceed to Checkout</button>
+      <Button onClick={handleCheckout}>Proceed to Checkout</Button>
     </CartItem>
   )
 }
