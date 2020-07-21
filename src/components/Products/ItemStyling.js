@@ -7,23 +7,33 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-const ItemStyling = ({ name, price, imageUrl, quantity, id, cartId, initialCart, setInitialCartArray }) => {
+const ItemStyling = ({ name, price, imageUrl, quantity, id, cartId, cartCost, setCartCost }) => {
   const [quant, setQuantity] = useState(1)
   const [cost, setCost] = useState(null)
   const [deleted, setDeleted] = useState(false)
-
-  useEffect(() => {
-    const initialValue = quant * price
-    setInitialCartArray([...initialCart, {
-      id: initialCart.length,
-      value: initialValue
-    }])
-    console.log(initialValue, 'second')
-  }, [])
+  // sets initial cost of item on initial render
   useEffect(() => {
     setCost(quant * price)
     // pushSubTotal(total => total.concat(cost))
   }, [cost])
+  // initializes array of cost of products
+  useEffect(() => {
+    const initialValue = quant * price
+    setCartCost(cartCost => [...cartCost, {
+      id: id,
+      value: initialValue
+    }])
+  }, [])
+  useEffect(() => {
+    const elementIndex = cartCost.findIndex(element => element.id === id)
+    if (elementIndex !== -1) {
+      const newArray = [...cartCost]
+      newArray[elementIndex] = { ...newArray[elementIndex], value: cost }
+      setCartCost(newArray)
+    }
+    console.log(elementIndex)
+  }, [cost])
+
   const handleChange = event => {
     event.persist()
     setQuantity(prevQuant => {
