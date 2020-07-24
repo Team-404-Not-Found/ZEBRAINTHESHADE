@@ -22,7 +22,7 @@ const unauthenticatedOptions = (
 const Header = ({ user }) => (
   <Navbar bg="primary" variant="dark" expand="md">
     <Navbar.Brand href="#">
-    ❁ Luxury-React-Auth-Template ❁
+      ❁ Luxury-Product-Luxury ❁
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
