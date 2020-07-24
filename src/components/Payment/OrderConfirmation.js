@@ -26,8 +26,9 @@ const OrderConfirmation = props => {
         // add comment "You can view this item in your order history"
         .then(() => console.log('successfully added to history. Redirect the user from this line.'))
         .catch(() => console.log('failed to push items to user history'))
-      for (let cartQuantity = cartArray.length - 1; cartQuantity > 0; cartQuantity--) {
-        itemInCart(cartArray[cartQuantity]._id, true)
+      for (let cartQuantity = cartArray.length - 1; cartQuantity >= 0; cartQuantity--) {
+        itemInCart(cartArray[cartQuantity]._id, false)
+          .then(() => console.log(cartArray[cartQuantity]._id))
         clearCart(userId)
           .then(() => setCartArray([]))
           // add comment "Your cart is empty"
