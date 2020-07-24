@@ -43,9 +43,10 @@ const ItemStyling = ({ name, price, imageUrl, quantity, id, cartId, cartCost, se
     destroyItemInCart(cartId, id)
       .then(res => {
         setDeleted(true)
-        res.sendStatus(204)
       })
-      .then(() => itemInCart(id, false))
+      .then(() => {
+        itemInCart(id, false)
+      })
       .catch(() => console.log('failed to delete'))
   }
   if (deleted) {

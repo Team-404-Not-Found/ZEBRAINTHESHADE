@@ -39,7 +39,10 @@ const ItemsInCart = props => {
   useEffect(() => {
     getCart(props.user._id)
       // .then(res => setCartArray(res.data.cart.products.toString()))
-      .then(res => setCartArray(res.data.cart.products))
+      .then(res => {
+        setCartArray(res.data.cart.products)
+        console.log('succeeded to get cart')
+      })
       // add comment "Oops something is wrong with your cart"
       .catch(() => props.msgAlert({
         heading: 'Error loading your cart',
@@ -59,9 +62,9 @@ const ItemsInCart = props => {
     <CartItem>
       <div>
         <Form.Group controlId="quantity">
-          {cartArray.map(product => (
+          {cartArray.map((product, i) => (
             <ItemStyling
-              key={product.name}
+              key={i}
               id={product._id}
               name={product.name}
               price={product.price}
