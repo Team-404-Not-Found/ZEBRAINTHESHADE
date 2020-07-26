@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { getOrderHistory } from '../../api/OrderHistory'
+import messages from '../AutoDismissAlert/messages'
 
 const OrderHistory = props => {
   console.log(props)
@@ -10,7 +11,11 @@ const OrderHistory = props => {
   useEffect(() => {
     getOrderHistory(props.user._id)
       .then(res => setOrderHistoryArray(res.data.user.orderHistory))
-      .catch(() => console.log('failed to get order history'))
+      .catch(() => props.msgAlert({
+        heading: 'Error loading your Order History',
+        message: messages.cartArrayFailure,
+        variant: 'danger'
+      }))
   }, [])
   const orderHistory = orderHistoryArray.map((order, i) => (
     <div key={i}>
