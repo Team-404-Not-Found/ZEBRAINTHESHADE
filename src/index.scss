@@ -123,3 +123,12 @@ max-height: 100%;
   margin: 50px auto;
   color:#413f3d;
 }
+.col-md-12 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+  background-color: #d8cfd0;
+  color:#413f3d;
+  padding: 10px;
+}

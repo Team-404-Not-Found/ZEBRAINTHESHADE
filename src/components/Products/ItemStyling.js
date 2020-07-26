@@ -3,6 +3,7 @@ import { destroyItemInCart, itemInCart } from '../../api/cartIndex'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { Redirect } from 'react-router-dom'
+import Col from 'react-bootstrap/Col'
 
 const ItemStyling = ({ name, price, imageUrl, quantity, id, cartId, cartCost, setCartCost }) => {
   const [quant, setQuantity] = useState(1)
@@ -59,26 +60,27 @@ const ItemStyling = ({ name, price, imageUrl, quantity, id, cartId, cartCost, se
 
   return (
     <div>
-      <div className='item-box'>
+      <Col md={12}>
         <div className='itemImg'>
           <img src={imageUrl} alt={name} />
         </div>
-        <p className='amount'>Name: {name}</p>
-        <p className='amount' name='price'>Price:<span>$</span>{price}</p>
-        <Form.Label className='quan'>Quantity:</Form.Label>
-        <Form.Control
-          required
-          name="quantity"
-          value={quant}
-          type="number"
-          min="1"
-          max={quantity}
-          onChange={handleChange}
-        />
-        <Form.Text className="text-muted">
-          Price of items is: {cost}
+        <div><p className='amount'>Name: {name}</p></div>
+        <div><Form.Label className='quan'>Quantity:</Form.Label>
+          <Form.Control
+            required
+            name="quantity"
+            value={quant}
+            type="number"
+            min="1"
+            max={quantity}
+            onChange={handleChange}
+          />
+        </div>
+        <div><Form.Text className="text-muted amount">
+          Price of items is: <span>$</span>{cost}
         </Form.Text>
-        <Button
+        </div>
+        <div><Button
           className='remove-btn'
           variant="dark"
           type="submit"
@@ -86,7 +88,8 @@ const ItemStyling = ({ name, price, imageUrl, quantity, id, cartId, cartCost, se
         >
       Remove
         </Button>
-      </div>
+        </div>
+      </Col>
     </div>
   )
 }
