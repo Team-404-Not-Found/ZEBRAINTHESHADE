@@ -73,7 +73,7 @@ class App extends Component {
             <ItemsInCart msgAlert={this.msgAlert} user={user} cartId={this.state.cartId}/>
           )} />
           <AuthenticatedRoute user={user} path='/order-history' render={() => (
-            <OrderHistory user={user}/>
+            <OrderHistory msgAlert={this.msgAlert} user={user}/>
           )} />
           <Route exact path='/' component={Inventory} />
           <Route exact path='/createProduct' component={ProductCreate} />
