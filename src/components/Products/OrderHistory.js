@@ -1,7 +1,18 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { getOrderHistory } from '../../api/OrderHistory'
 
 const OrderHistory = props => {
-  const orderHistory = props.user.orderHistory.map((order, i) => (
+  console.log(props)
+  // initialize empty array for orderHistory productsArray
+  const [orderHistoryArray, setOrderHistoryArray] = useState([])
+
+  // useEffect to request get request from api
+  useEffect(() => {
+    getOrderHistory(props.user._id)
+      .then(res => setOrderHistoryArray(res.data.user.orderHistory))
+      .catch(() => console.log('failed to get order history'))
+  }, [])
+  const orderHistory = orderHistoryArray.map((order, i) => (
     <div key={i}>
       <div className='item-box'>
         <div className='itemImg'>
