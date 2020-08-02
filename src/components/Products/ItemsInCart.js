@@ -41,7 +41,6 @@ const ItemsInCart = props => {
       // .then(res => setCartArray(res.data.cart.products.toString()))
       .then(res => {
         setCartArray(res.data.cart.products)
-        console.log('succeeded to get cart')
       })
       // add comment "Oops something is wrong with your cart"
       .catch(() => props.msgAlert({
