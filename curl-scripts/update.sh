@@ -1,4 +1,4 @@
-API="https://protected-gorge-91362.herokuapp.com"
+API="http://localhost:4741"
 URL_PATH="/products"
 
 curl "${API}${URL_PATH}/${ID}" \

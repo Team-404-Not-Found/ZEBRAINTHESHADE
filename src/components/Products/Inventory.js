@@ -16,7 +16,7 @@ const Inventory = () => {
   useEffect(() => {
     productsIndex()
       .then(res => setProductsArray(res.data.products))
-      .catch(() => console.log('failed to get places'))
+      .catch()
   }, [])
 
   // basic styling for Index values

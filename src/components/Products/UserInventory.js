@@ -17,7 +17,7 @@ const UserInventory = (props) => {
   useEffect(() => {
     productsIndex()
       .then(res => setProductsArray(res.data.products))
-      .catch(() => console.log('failed to get products'))
+      .catch()
   }, [])
 
   // basic styling for Index values

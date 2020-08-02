@@ -24,8 +24,8 @@ const OrderConfirmation = props => {
       // give object to order history API call along with ownerID
       pushToHistory(containerObject, userId)
         // add comment "You can view this item in your order history"
-        .then(() => console.log('successfully added to history. Redirect the user from this line.'))
-        .catch(() => console.log('failed to push items to user history'))
+        .then(() => console.log('successfully added to history'))
+        .catch()
       for (let cartQuantity = cartArray.length - 1; cartQuantity >= 0; cartQuantity--) {
         itemInCart(cartArray[cartQuantity]._id, false)
           .then(() => console.log(cartArray[cartQuantity]._id))
@@ -33,7 +33,7 @@ const OrderConfirmation = props => {
           .then(() => setCartArray([]))
           // add comment "Your cart is empty"
           .then(() => console.log('cart is empty'))
-          .catch(() => console.log('failed to reset cart'))
+          .catch()
       }
     })
   }, [])
