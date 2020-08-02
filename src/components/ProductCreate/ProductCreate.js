@@ -29,7 +29,7 @@ const ProductCreate = () => {
     event.preventDefault()
     productsCreate(item)
       .then(res => res.status(201).json(res))
-      .catch(() => console.log('did not create product'))
+      .catch()
   }
 
   return (

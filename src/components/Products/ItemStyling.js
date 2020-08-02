@@ -48,7 +48,7 @@ const ItemStyling = ({ name, price, imageUrl, quantity, id, cartId, cartCost, se
       .then(() => {
         itemInCart(id, false)
       })
-      .catch(() => console.log('failed to delete'))
+      .catch()
   }
   if (deleted) {
     return (
