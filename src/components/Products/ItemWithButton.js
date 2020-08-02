@@ -16,15 +16,15 @@ const ItemWithButton = ({ name, price, description, imageUrl, category, quantity
     // which recieves a cart id and a product id
     pushToCart(cartId, id)
     // add comment "Item added to your Cart"
+      .then(() => {
+        setCartBool(true)
+        itemInCart(id, true)
+      })
       .then(() => msgAlert({
         heading: 'Added!',
         message: messages.addItemSuccess,
         variant: 'success'
       }))
-      .then(() => {
-        setCartBool(true)
-        itemInCart(id, true)
-      })
       // add comment "Failed to add item to your cart"
       .catch(() => msgAlert({
         heading: 'Sorry...',
