@@ -3,7 +3,6 @@ import { getOrderHistory } from '../../api/OrderHistory'
 import messages from '../AutoDismissAlert/messages'
 
 const OrderHistory = props => {
-  console.log(props)
   // initialize empty array for orderHistory productsArray
   const [orderHistoryArray, setOrderHistoryArray] = useState([])
 

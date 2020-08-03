@@ -4,8 +4,6 @@ import Button from 'react-bootstrap/Button'
 const CheckoutElement = ({ price, quantity, id }) => {
   const [subTotal, setSubTotal] = useState(0)
   const handleChangeSubTotal = (newQuan, price) => {
-    console.log(newQuan, ' this is quan')
-    console.log(price, ' this is Price')
     const subTotal = setSubTotal(newQuan * price)
     return subTotal
   }
