@@ -36,11 +36,13 @@ This is our wireframe planning before we code. The page on web application might
 
 #### WireFrame
 
-![HomePage-Wireframe](WireFrames/Home-page.png)
+LandingPage - <WireFrames/Home-page.png>
 
-![Signup-Wireframe](WireFrames/After-signup-Page.png)
+LandingPage - <WireFrames/After-signup-Page.png>
 
-![Will-Product-Wireframe](WireFrames/View-Product-Page.png)
+LandingPage - <WireFrames/After-signIn-Page.png>
+
+LandingPage - <WireFrames/View Product-Page.png>
 
 
 ### Unsolved Problems

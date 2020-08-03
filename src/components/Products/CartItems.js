@@ -3,7 +3,7 @@ import './../../index.scss'
 
 const CartItems = props => (
   <div>
-    <h1 className='cartName'>Cart</h1>
+    <h1 className='cartName'>❀Cart❀</h1>
     <div className="cart-box">
       {props.children}
     </div>
